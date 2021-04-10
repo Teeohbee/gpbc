@@ -1,6 +1,10 @@
 <h1><%= @game.title %></h1>
 <p><%= @game.description %></p>
-<img src="<%= @game.image %>" width="600" height="300">
+<p><img src="<%= @game.image %>" width="600" height="300"></p>
 <% if user_signed_in? %>
   <%= link_to('Add Review', new_review_path(game: @game)) %>
+<% end %>
+<% @game.reviews.each do |review| %>
+  <p><%= review.body %></p>
+  <p>Score: <%= review.score %></p>
 <% end %>

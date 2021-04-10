@@ -1,2 +1,6 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1><%= @game.title %></h1>
+<p><%= @game.description %></p>
+<img src="<%= @game.image %>" width="600" height="300">
+<% if user_signed_in? %>
+  <%= link_to('Add Review', new_review_path(game: @game)) %>
+<% end %>

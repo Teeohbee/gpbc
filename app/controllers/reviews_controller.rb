@@ -12,7 +12,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+    game = Game.find(params[:game])
+    @review = game.reviews.build
   end
 
   # GET /reviews/1/edit
@@ -21,16 +22,12 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
-    @review = Review.new(review_params)
+    @review = current_user.reviews.build(review_params)
 
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    if @review.save
+      redirect_to root_path, notice: "Review was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 

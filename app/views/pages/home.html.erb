@@ -7,4 +7,5 @@
 <% @game.reviews.each do |review| %>
   <p><%= review.body %></p>
   <p>Score: <%= review.score %></p>
+  <p><%= "#{review.user.first_name} #{review.user.last_name}" %></p>
 <% end %>

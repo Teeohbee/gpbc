@@ -8,4 +8,7 @@
   <p><%= review.body %></p>
   <p>Score: <%= review.score %></p>
   <p><%= "#{review.user.first_name} #{review.user.last_name}" %></p>
+  <% if review.user == current_user %>
+  <p><%= link_to 'Edit', edit_review_path(review) %></p>
+  <% end %>
 <% end %>
